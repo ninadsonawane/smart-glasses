@@ -65,28 +65,28 @@ while True:
 
     text = ''
     for i in indices:
-        print(i)
         # print(objectsss[i])
-        i[0] = i
+        i= 1*(i == 0) + i*(i != 0 )
         # print(objectsss[i]," " ,confs[0])
-        if (prev == classNames[classIds[i][0]-1].upper()):
+
+        if (prev == classNames[classIds[i-1]-1].upper()):
             continue
 
-        box = bbox[i]
+        box = bbox[i-1]
         # print(box)
         x, y, w, h = box[0], box[1], box[2], box[3]
         cv2.rectangle(img, (x, y), (x+w, h+y), color=(0, 255, 0), thickness=2)
-        cv2.putText(img, classNames[classIds[i][0]-1].upper(), (box[0]+10, box[1]+30),
+        cv2.putText(img, classNames[classIds[i-1]-1].upper(), (box[0]+10, box[1]+30),
                     cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
 
         # print(classNames[classIds[i][0]-1].upper())
 
         # converting text sample to audio
 
-        text += 'There is a ' + classNames[classIds[i][0]-1].upper()+' '
+        text += 'There is a ' + classNames[classIds[i-1]-1].upper()+' '
         print(text)
         # text+=classNames[classIds[i][0]-1].upper()+' '
-        prev = classNames[classIds[i][0]-1].upper()
+        prev = classNames[classIds[i-1]-1].upper()
 
     current_time = datetime.datetime.now()
     current_time = current_time.strftime("%m/%d/%Y%H:%M:%S")
