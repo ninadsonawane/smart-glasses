@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import alanBtn from '@alan-ai/alan-sdk-web';
+import { useEffect , useState  } from 'react';
 
+
+const alankey =  'af0d05efc621847cd75420d1994b4df62e956eca572e1d8b807a3e2338fdd0dc/stage'
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [It , setIt] = useState(0)
+  useEffect(() => {
+    alanBtn({
+      key: alankey,
+      onCommand: ({ command }) => {
+       if(command === 'profile') {
+        setIt(1)
+       } else if(command === 'feeds') {
+        setIt(2)
+       }
+       else if(command === 'create') {
+        setIt(3)
+      }
+      }
+    });
+
+      
+  }, []);
+  if (It === 0) {
+    return(
+      <h1>NINad fucker</h1>
+    )
+  }
+  else if(It === 1){
+    return(
+      <h1>Profile</h1>
+    )
+  }  else if(It === 2) {
+    return(
+      <h1>Feeds</h1>
+    )
+  }
+  else if(It === 3) {
+    return(
+      <h1>Create</h1>
+    )
+  }
+ 
 }
 
 export default App;
